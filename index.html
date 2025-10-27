@@ -89,25 +89,6 @@
             border-radius: 5px;
         }
         
-        .project-card {
-            transition: all 0.3s ease;
-            border: none;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .project-img {
-            height: 200px;
-            object-fit: cover;
-        }
-        
         .timeline {
             position: relative;
             padding-left: 50px;
@@ -221,58 +202,59 @@
             bottom: 30px;
         }
         
-        .project-placeholder {
-            background-color: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 10px;
-            padding: 30px;
+        /* Styles pour les sections de navigation */
+        .nav-section {
+            padding: 100px 0;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-section-content {
             text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-section-icon {
+            font-size: 4rem;
+            color: var(--secondary-color);
             margin-bottom: 30px;
         }
         
-        .btn-add-project {
-            background-color: var(--secondary-color);
-            color: white;
-            margin-top: 15px;
-        }
-        
-        /* Styles pour la section des comptes rendus */
-        .report-item {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
+        .nav-section h2 {
             margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-        
-        .report-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .report-item h4 {
             color: var(--primary-color);
-            margin-bottom: 10px;
         }
         
-        .report-item p {
+        .nav-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             color: #6c757d;
         }
         
-        .add-report-btn {
+        .section-link {
+            display: inline-block;
+            padding: 12px 30px;
             background-color: var(--secondary-color);
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 20px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
             transition: all 0.3s ease;
+            margin: 10px;
         }
         
-        .add-report-btn:hover {
+        .section-link:hover {
             background-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        /* Alternance des couleurs de fond */
+        .bg-light-alt {
+            background-color: #f8f9fa;
         }
     </style>
 </head>
@@ -299,7 +281,7 @@
                         <a class="nav-link" href="#reports">Comptes Rendus</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projets</a>
+                        <a class="nav-link" href="#veille">Veille Technologique</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#experience">Expérience</a>
@@ -329,7 +311,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-5" style="background-color: #f8f9fa;">
+    <section id="about" class="py-5 bg-light-alt">
         <div class="container py-5">
             <h2 class="section-title">À propos de moi</h2>
             <div class="row">
@@ -412,50 +394,47 @@
         </div>
     </section>
 
-    <!-- Reports Section -->
-    <section id="reports" class="py-5" style="background-color: #f8f9fa;">
-        <div class="container py-5">
-            <h2 class="section-title">Comptes Rendus</h2>
-            <div class="row" id="reports-container">
-                <!-- Les comptes rendus seront ajoutés ici dynamiquement -->
-                <div class="col-md-6 mb-4">
-                    <div class="report-item">
-                        <h4>Compte rendu Portfolio</h4>
-                        <p class="text-muted">Développement web et présentation professionnelle</p>
-                        <a href="#" class="btn btn-sm btn-primary">Lire le compte rendu</a>
-                    </div>
+    <!-- Reports Navigation Section -->
+    <section id="reports" class="nav-section bg-light-alt">
+        <div class="container">
+            <div class="nav-section-content">
+                <div class="nav-section-icon">
+                    <i class="bi bi-folder"></i>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="report-item">
-                        <h4>Compte rendu Jeu</h4>
-                        <p class="text-muted">Jeu joués</p>
-                        <a href="#" class="btn btn-sm btn-primary">Lire le compte rendu</a>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="report-item">
-                        <h4>Compte rendu Paramétrage</h4>
-                        <p class="text-muted">2022-2023 - Configuration de systèmes</p>
-                        <a href="Compte-rendu.pdf" class="btn btn-sm btn-primary">lire le compte-rendu</a>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="report-item">
-                        <h4>Compte rendu HTML</h4>
-                        <p class="text-muted">2025-2027 - Développement front-end</p>
-                        <a href="📘 Compte rendu — Atelier 02 _ TD1 Partie 1 (HTML.pdf" class="btn btn-sm btn-primary">Lire le compte rendu</a>
-                    </div>
+                <h2>Comptes Rendus</h2>
+                <p>Découvrez l'ensemble de mes comptes rendus détaillés sur différents projets et travaux en sécurité informatique, développement et analyse de systèmes.</p>
+                <div>
+                    <a href="Page compte rendu.html" class="section-link">
+                        <i class="bi bi-collection"></i> Voir tous les comptes rendus
+                    </a>
+                    <a href="Page dernier compte rendu.html" class="section-link">
+                        <i class="bi bi-file-text"></i> Dernier compte rendu
+                    </a>
                 </div>
             </div>
-            
-            <!-- Bouton pour ajouter un nouveau compte rendu (version simplifiée) -->
-            <div class="text-center mt-4">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReportModal">
-                    <i class="bi bi-plus-circle"></i> Ajouter un compte rendu
-                </button>
-            </div
-             <!-- Experience Section -->
-    <section id="experience" class="py-5">
+        </div>
+    </section>
+
+    <!-- Veille Technologique Navigation Section -->
+    <section id="veille" class="nav-section">
+        <div class="container">
+            <div class="nav-section-content">
+                <div class="nav-section-icon">
+                    <i class="bi bi-binoculars"></i>
+                </div>
+                <h2>Veille Technologique</h2>
+                <p>Restez informé des dernières tendances en cybersécurité grâce à ma veille technologique régulière. Analyses, tendances et perspectives sur l'évolution des menaces et des solutions de sécurité.</p>
+                <div>
+                    <a href="Veille technologique.html" class="section-link">
+                        <i class="bi bi-newspaper"></i> Consulter la veille
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-5 bg-light-alt">
         <div class="container py-5">
             <h2 class="section-title">Mon parcours</h2>
             <div class="timeline">
@@ -479,7 +458,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5" style="background-color: #f8f9fa;">
+    <section id="contact" class="py-5">
         <div class="container py-5">
             <h2 class="section-title">Contactez-moi</h2>
             <div class="row">
@@ -561,34 +540,6 @@
 
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-    <!-- Add Project Modal -->
-    <div class="modal fade" id="addProjectModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ajouter un projet</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Pour ajouter vos projets, vous pouvez modifier directement le code HTML dans la section dédiée.</p>
-                    <p>Structure recommandée pour un projet :</p>
-                    <pre>
-&lt;div class="col-md-4"&gt;
-    &lt;div class="project-card card"&gt;
-        &lt;img src="lien-vers-image.jpg" class="project-img card-img-top" alt="Nom du projet"&gt;
-        &lt;div class="card-body"&gt;
-            &lt;h5 class="card-title"&gt;Nom du projet&lt;/h5&gt;
-            &lt;p class="card-text"&gt;Description du projet&lt;/p&gt;
-            &lt;button class="btn btn-primary"&gt;Voir les détails&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-                    </pre>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
