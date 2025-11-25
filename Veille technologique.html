@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - Cyber War | Mon Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0d1421;
+            --secondary-color: #1c2333;
+            --accent-color: #2a3a5c;
+            --highlight-color: #e94560;
+            --text-color: #f1f1f1;
+            --table-header: #1a2a4a;
+            --table-row-even: rgba(255, 255, 255, 0.03);
+            --table-row-odd: rgba(255, 255, 255, 0.01);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--highlight-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--highlight-color);
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--highlight-color), #ff7b9c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #cccccc;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ff2e4f;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--highlight-color);
+            border-radius: 2px;
+        }
+
+        /* Contrôles du tableau */
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border-radius: 5px;
+            border: 1px solid var(--accent-color);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #cccccc;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--accent-color);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* Tableau */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .watch-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+
+        .watch-table th {
+            background-color: var(--table-header);
+            padding: 1.2rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--highlight-color);
+            border-bottom: 2px solid var(--accent-color);
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .watch-table th:hover {
+            background-color: var(--accent-color);
+        }
+
+        .watch-table th i {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .watch-table td {
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .watch-table tr:nth-child(even) {
+            background-color: var(--table-row-even);
+        }
+
+        .watch-table tr:nth-child(odd) {
+            background-color: var(--table-row-odd);
+        }
+
+        .watch-table tr:hover {
+            background-color: rgba(233, 69, 96, 0.1);
+        }
+
+        /* Badges de catégorie */
+        .category-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .category-menace {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+
+        .category-defense {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .category-acteurs {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .category-technique {
+            background-color: rgba(0, 123, 255, 0.2);
+            color: #007bff;
+        }
+
+        /* Priorité */
+        .priority {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .priority-high {
+            color: #dc3545;
+        }
+
+        .priority-medium {
+            color: #ffc107;
+        }
+
+        .priority-low {
+            color: #28a745;
+        }
+
+        /* Actions */
+        .action-link {
+            color: var(--highlight-color);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: none;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pagination button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .pagination button.active {
+            background-color: var(--highlight-color);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Statistiques */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #cccccc;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .table-controls {
+                flex-direction: column;
+            }
+            
+            .search-box, .filter-controls {
+                width: 100%;
+            }
+            
+            .filter-controls {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">CyberWatch</div>
+                <div class="nav-links">
+                    <a href="#">Accueil</a>
+                    <a href="#">Portfolio</a>
+                    <a href="#">À propos</a>
+                    <a href="#">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Veille Technologique - Cyber War</h1>
+            <p>Surveillance en temps réel des menaces cybernétiques, des acteurs étatiques et des technologies émergentes dans le domaine de la cyberguerre.</p>
+            <a href="#veille-table" class="btn">Explorer la veille</a>
+        </div>
+    </section>
+
+    <section id="veille-table">
+        <div class="container">
+            <h2 class="section-title">Tableau de Veille Technologique</h2>
+            
+            <div class="table-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Rechercher dans la veille...">
+                </div>
+                <div class="filter-controls">
+                    <select id="category-filter" class="filter-select">
+                        <option value="">Toutes les catégories</option>
+                        <option value="menace">Menaces</option>
+                        <option value="defense">Défense</option>
+                        <option value="acteurs">Acteurs</option>
+                        <option value="technique">Techniques</option>
+                    </select>
+                    <select id="priority-filter" class="filter-select">
+                        <option value="">Toutes les priorités</option>
+                        <option value="high">Haute</option>
+                        <option value="medium">Moyenne</option>
+                        <option value="low">Basse</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="watch-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="date">Date <i class="fas fa-sort"></i></th>
+                            <th data-sort="title">Sujet <i class="fas fa-sort"></i></th>
+                            <th data-sort="category">Catégorie <i class="fas fa-sort"></i></th>
+                            <th data-sort="priority">Priorité <i class="fas fa-sort"></i></th>
+                            <th data-sort="source">Outils <i class="fas fa-sort"></i></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Les données seront insérées ici par JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination" id="pagination">
+                <!-- La pagination sera générée par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="total-entries">0</div>
+                    <div class="stat-label">Entrées de veille</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="high-priority">0</div>
+                    <div class="stat-label">Alertes haute priorité</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="this-month">0</div>
+                    <div class="stat-label">Nouveautés ce mois-ci</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Veille technologique cyber guerre - Mon Portfolio &copy; 2023</p>
+        </div>
+    </footer>
+
+    <script>
+        // Données de la veille technologique
+        const watchData = [
+            {
+                id: 1,
+                date: "2023-10-15",
+                title: "Nouvelle campagne de cyberespionnage attribuée à APT29",
+                category: "menace",
+                priority: "high",
+                source: "CERT-FR",
+                link: "#"
+            },
+            {
+                id: 2,
+                date: "2023-10-12",
+                title: "Vulnérabilité zero-day dans les systèmes de contrôle industriel",
+                category: "technique",
+                priority: "high",
+                source: "CVE Database",
+                link: "#"
+            },
+            {
+                id: 3,
+                date: "2023-10-10",
+                title: "L'OTAN renforce ses capacités cyber défensives",
+                category: "defense",
+                priority: "medium",
+                source: "Reuters",
+                link: "#"
+            },
+            {
+                id: 4,
+                date: "2023-10-08",
+                title: "Nouvelle régulation européenne sur la cybersécurité",
+                category: "defense",
+                priority: "medium",
+                source: "UE Commission",
+                link: "#"
+            },
+            {
+                id: 5,
+                date: "2023-10-05",
+                title: "Analyse des capacités cyber offensives de la Corée du Nord",
+                category: "acteurs",
+                priority: "medium",
+                source: "CSIS",
+                link: "#"
+            },
+            {
+                id: 6,
+                date: "2023-10-03",
+                title: "Attaque par ransomware contre un hôpital en France",
+                category: "menace",
+                priority: "high",
+                source: "ANSSI",
+                link: "#"
+            },
+            {
+                id: 7,
+                date: "2023-09-28",
+                title: "Nouvelle technique d'exfiltration de données via DNS",
+                category: "technique",
+                priority: "medium",
+                source: "SANS Institute",
+                link: "#"
+            },
+            {
+                id: 8,
+                date: "2023-09-25",
+                title: "Les groupes hacktivistes russes et leurs cibles",
+                category: "acteurs",
+                priority: "low",
+                source: "Recorded Future",
+                link: "#"
+            },
+            {
+                id: 9,
+                date: "2023-09-20",
+                title: "Déploiement de l'IA dans la détection des menaces",
+                category: "defense",
+                priority: "medium",
+                source: "MIT Tech Review",
+                link: "#"
+            },
+            {
+                id: 10,
+                date: "2023-09-15",
+                title: "Campagne de phishing ciblant les diplomates",
+                category: "menace",
+                priority: "medium",
+                source: "FireEye",
+                link: "#"
+            }
+        ];
+
+        // Éléments DOM
+        const tableBody = document.getElementById('table-body');
+        const searchInput = document.getElementById('search-input');
+        const categoryFilter = document.getElementById('category-filter');
+        const priorityFilter = document.getElementById('priority-filter');
+        const paginationContainer = document.getElementById('pagination');
+        const totalEntriesElement = document.getElementById('total-entries');
+        const highPriorityElement = document.getElementById('high-priority');
+        const thisMonthElement = document.getElementById('this-month');
+
+        // Variables globales
+        let currentPage = 1;
+        const entriesPerPage = 5;
+        let filteredData = [...watchData];
+        let sortColumn = 'date';
+        let sortDirection = 'desc';
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            renderTable();
+            setupPagination();
+            setupEventListeners();
+        });
+
+        // Mise à jour des statistiques
+        function updateStats() {
+            totalEntriesElement.textContent = watchData.length;
+            
+            const highPriorityCount = watchData.filter(item => item.priority === 'high').length;
+            highPriorityElement.textContent = highPriorityCount;
+            
+            const thisMonth = new Date().getMonth();
+            const thisYear = new Date().getFullYear();
+            const thisMonthCount = watchData.filter(item => {
+                const itemDate = new Date(item.date);
+                return itemDate.getMonth() === thisMonth && itemDate.getFullYear() === thisYear;
+            }).length;
+            thisMonthElement.textContent = thisMonthCount;
+        }
+
+        // Rendu du tableau
+        function renderTable() {
+            tableBody.innerHTML = '';
+            
+            const startIndex = (currentPage - 1) * entriesPerPage;
+            const endIndex = startIndex + entriesPerPage;
+            const pageData = filteredData.slice(startIndex, endIndex);
+            
+            if (pageData.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Aucun résultat trouvé</td></tr>';
+                return;
+            }
+            
+            pageData.forEach(item => {
+                const row = document.createElement('tr');
+                
+                // Formatage de la date
+                const dateObj = new Date(item.date);
+                const formattedDate = `${dateObj.getDate().toString().padStart(2, '0')}/${(dateObj.getMonth()+1).toString().padStart(2, '0')}/${dateObj.getFullYear()}`;
+                
+                // Détermination de la classe de catégorie
+                let categoryClass = '';
+                let categoryText = '';
+                switch(item.category) {
+                    case 'menace':
+                        categoryClass = 'category-menace';
+                        categoryText = 'Menace';
+                        break;
+                    case 'defense':
+                        categoryClass = 'category-defense';
+                        categoryText = 'Défense';
+                        break;
+                    case 'acteurs':
+                        categoryClass = 'category-acteurs';
+                        categoryText = 'Acteurs';
+                        break;
+                    case 'technique':
+                        categoryClass = 'category-technique';
+                        categoryText = 'Technique';
+                        break;
+                }
+                
+                // Détermination de la priorité
+                let priorityIcon = '';
+                let priorityText = '';
+                switch(item.priority) {
+                    case 'high':
+                        priorityIcon = '<i class="fas fa-exclamation-circle"></i>';
+                        priorityText = 'Haute';
+                        break;
+                    case 'medium':
+                        priorityIcon = '<i class="fas fa-exclamation-triangle"></i>';
+                        priorityText = 'Moyenne';
+                        break;
+                    case 'low':
+                        priorityIcon = '<i class="fas fa-info-circle"></i>';
+                        priorityText = 'Basse';
+                        break;
+                }
+                
+                row.innerHTML = `
+                    <td>${formattedDate}</td>
+                    <td>${item.title}</td>
+                    <td><span class="category-badge ${categoryClass}">${categoryText}</span></td>
+                    <td><div class="priority priority-${item.priority}">${priorityIcon} ${priorityText}</div></td>
+                    <td>${item.source}</td>
+                    <td><a href="${item.link}" class="action-link" target="_blank">Voir <i class="fas fa-external-link-alt"></i></a></td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Configuration de la pagination
+        function setupPagination() {
+            const totalPages = Math.ceil(filteredData.length / entriesPerPage);
+            
+            paginationContainer.innerHTML = '';
+            
+            // Bouton précédent
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                    setupPagination();
+                }
+            });
+            paginationContainer.appendChild(prevButton);
+            
+            // Pages
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTable();
+                    setupPagination();
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+            
+            // Bouton suivant
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                    setupPagination();
+                }
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+
+        // Configuration des écouteurs d'événements
+        function setupEventListeners() {
+            // Recherche
+            searchInput.addEventListener('input', function() {
+                applyFilters();
+            });
+            
+            // Filtres
+            categoryFilter.addEventListener('change', applyFilters);
+            priorityFilter.addEventListener('change', applyFilters);
+            
+            // Tri des colonnes
+            document.querySelectorAll('.watch-table th[data-sort]').forEach(header => {
+                header.addEventListener('click', function() {
+                    const column = this.getAttribute('data-sort');
+                    
+                    if (sortColumn === column) {
+                        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        sortColumn = column;
+                        sortDirection = 'asc';
+                    }
+                    
+                    // Mise à jour des icônes de tri
+                    document.querySelectorAll('.watch-table th i').forEach(icon => {
+                        icon.className = 'fas fa-sort';
+                    });
+                    
+                    const currentIcon = this.querySelector('i');
+                    currentIcon.className = sortDirection === 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down';
+                    
+                    sortData();
+                    currentPage = 1;
+                    renderTable();
+                    setupPagination();
+                });
+            });
+        }
+
+        // Application des filtres
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const categoryValue = categoryFilter.value;
+            const priorityValue = priorityFilter.value;
+            
+            filteredData = watchData.filter(item => {
+                const matchesSearch = item.title.toLowerCase().includes(searchTerm) || 
+                                      item.source.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryValue || item.category === categoryValue;
+                const matchesPriority = !priorityValue || item.priority === priorityValue;
+                
+                return matchesSearch && matchesCategory && matchesPriority;
+            });
+            
+            sortData();
+            currentPage = 1;
+            renderTable();
+            setupPagination();
+        }
+
+        // Tri des données
+        function sortData() {
+            filteredData.sort((a, b) => {
+                let aValue, bValue;
+                
+                switch(sortColumn) {
+                    case 'date':
+                        aValue = new Date(a.date);
+                        bValue = new Date(b.date);
+                        break;
+                    case 'title':
+                        aValue = a.title.toLowerCase();
+                        bValue = b.title.toLowerCase();
+                        break;
+                    case 'category':
+                        aValue = a.category;
+                        bValue = b.category;
+                        break;
+                    case 'priority':
+                        // Priorité personnalisée: high > medium > low
+                        const priorityOrder = { high: 3, medium: 2, low: 1 };
+                        aValue = priorityOrder[a.priority];
+                        bValue = priorityOrder[b.priority];
+                        break;
+                    case 'source':
+                        aValue = a.source.toLowerCase();
+                        bValue = b.source.toLowerCase();
+                        break;
+                    default:
+                        aValue = a[sortColumn];
+                        bValue = b[sortColumn];
+                }
+                
+                if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+                if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+    </script>
+</body>
+</html>
